@@ -16,7 +16,7 @@ class CustomButton extends StatelessWidget {
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              'Hola mudo',
+              'Hola mundo',
               style: TextStyle(color: Colors.white),
             ),
           ),

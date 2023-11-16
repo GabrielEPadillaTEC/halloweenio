@@ -37,7 +37,7 @@ final List<RouteBase> routes = [
   ),
   GoRoute(
     path: '/counter',
-    name: CounterScreen.screenName,
+    name: CounterScreen.name,
     builder: (BuildContext context, GoRouterState state) => const CounterScreen(),
   ),
   GoRoute(
@@ -59,5 +59,15 @@ final List<RouteBase> routes = [
     path: '/infinite',
     name: InfiniteScrollScreen.screenName,
     builder: (context, state) => const InfiniteScrollScreen(),
+  ),
+  // GoRoute(
+  //   path: '/counter-river',
+  //   name: CounterScreen.name,
+  //   builder: (context, state) => const CounterScreen(),
+  // ),
+  GoRoute(
+    path: '/theme-changer',
+    name: ThemeChangerScreen.name,
+    builder: (context, state) => const ThemeChangerScreen(),
   ),
 ];

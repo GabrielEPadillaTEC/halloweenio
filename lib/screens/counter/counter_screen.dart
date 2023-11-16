@@ -1,69 +1,50 @@
-import 'package:flutter/material.dart';
-import '../../../presentation/componentes/CustomButtom.dart';
 
-class CounterScreen extends StatefulWidget {
-  static const String screenName = 'counter_screen';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgets_app/presentation/providers/counter_provider.dart';
+import 'package:widgets_app/presentation/providers/theme_provider.dart';
+
+class CounterScreen extends ConsumerWidget {
+
+  static const name = 'counter_screen';
+
+
   const CounterScreen({super.key});
 
   @override
-  State<CounterScreen> createState() => _CounterScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _CounterScreenState extends State<CounterScreen> {
-  int variable = 0;
-  String txt = "Clicks";
-  @override
-  Widget build(BuildContext context) {
+    final int clickCounter = ref.watch( counterProvider );
+    final bool isDarkMode = ref.watch( isDarkModeProvider );
+
     return Scaffold(
-        appBar: AppBar(
-            title: const Center(
-                child: Text('Contador', style: TextStyle(fontSize: 60)))),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '$variable',
-                style:
-                    const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
-              ),
-              Text(variable > 1 ? "Clicks" : "Click",
-                  style: const TextStyle(fontSize: 60))
-            ],
-          ),
-        ),
-        floatingActionButton: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CustomButton(
-              icon: Icons.plus_one,
-              onPressed: () {
-                setState(() {
-                  variable++; //Icons.plus_one
-                });
-              },
-            ),
-            const SizedBox(height: 18),
-            CustomButton(
-              icon: Icons.exposure_minus_1,
-              onPressed: () {
-                setState(() {
-                  if (variable > 0) {
-                    variable--; //Icons.exposure_minus_1
-                  }
-                });
-              },
-            ),
-            const SizedBox(height: 18),
-            CustomButton(
-              icon: Icons.exposure_zero,
-              onPressed: () {
-                setState(() {
-                  variable = 0; //Icons.exposure_zero
-                });
-              },
-            )
-          ],
-        ));
+      appBar: AppBar(
+        title: const Text('Counter Screen'),
+        actions: [
+          IconButton(
+            icon: Icon( isDarkMode ? Icons.dark_mode_outlined : Icons.light_mode_outlined ),
+            onPressed: () {
+              ref.read( isDarkModeProvider.notifier )
+                  .update((state) => !state );
+            },
+          )
+        ],
+      ),
+
+      body: Center(
+        child: Text('Valor: $clickCounter', style: Theme.of(context).textTheme.titleLarge ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: const Icon( Icons.add ),
+        onPressed: (){
+          // ref.read(counterProvider.notifier)
+          //   .update((state) => state + 1);
+          ref.read( counterProvider.notifier ).state++;
+
+        },
+      ),
+
+    );
   }
 }

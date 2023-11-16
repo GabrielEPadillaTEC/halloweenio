@@ -9,3 +9,4 @@ export 'package:widgets_app/screens/snackbar/snackbar_screen.dart';
 export 'package:widgets_app/screens/chat/chat_screen.dart';
 export 'package:widgets_app/screens/counter/counter_screen.dart';
 export 'package:widgets_app/screens/ui_controls/ui_controls_screen.dart';
+export 'package:widgets_app/screens/theme_changer/theme_changer_screen.dart';
